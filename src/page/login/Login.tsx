@@ -1,14 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../components/ui/button";
 import { Link } from "react-router-dom";
+import { ILoginFormInput } from "../../types/userData";
 
-interface IFormInput {
-  email: string;
-  password: string;
-}
 const Login = () => {
-  const { register, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const { register, handleSubmit } = useForm<ILoginFormInput>();
+  const onSubmit: SubmitHandler<ILoginFormInput> = (data) => {
     console.log(data);
   };
   return (
@@ -57,8 +54,8 @@ const Login = () => {
               <input type="submit" />
             </Button>
             <div className="pt-4  ">
-              <p>New Here! Need an Account?</p>
               <Link to="/register" className="font-semibold">
+                <p>New Here! Need an Account?</p>
                 Register
               </Link>
             </div>
