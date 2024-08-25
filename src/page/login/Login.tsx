@@ -1,12 +1,40 @@
-import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../components/ui/button";
-import { Link } from "react-router-dom";
-import { ILoginFormInput } from "../../types/userData";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useLoginMutation } from "../../redux/features/login/loginApi";
+import {
+  resetForm,
+  setEmail,
+  setPassword,
+} from "../../redux/features/login/loginSlice";
+import { jwtDecode } from "jwt-decode";
+
+import { setToken, setUser } from "../../redux/features/user/userSlice";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm<ILoginFormInput>();
-  const onSubmit: SubmitHandler<ILoginFormInput> = (data) => {
-    console.log(data);
+  // hooks
+  const dispatch = useAppDispatch();
+  const { email, password } = useAppSelector((state) => state.login);
+  const navigate = useNavigate();
+  const [login, { data }] = useLoginMutation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const loginData = {
+      email,
+      password,
+    };
+
+    const { data } = await login(loginData);
+    if (data) {
+      const token: string = data?.token;
+      const user = jwtDecode(token);
+      dispatch(setUser(user));
+      dispatch(setToken(setToken));
+      navigate("/");
+    }
+
+    dispatch(resetForm());
   };
   return (
     <div className="mt-56 px-10 py-20 bg-indigo-950 rounded-lg">
@@ -19,34 +47,42 @@ const Login = () => {
               of your bookings, manage your profile, and enjoy hassle-free
               scheduling.
             </p>
-            {/* <p className="text-lg">
-              New to our platform? Join us and make the most out of your sports
-              experience. Your next game is just a booking away!
-            </p> */}
           </div>
         </div>
         <div className="flex justify-center items-center text-black rounded-lg px-12  py-10 bg-orange-600">
-          <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+          <form className="space-y-3" onSubmit={handleSubmit}>
             <h1 className="text-4xl font-bold">Login</h1>
             <div className="space-y-2">
               <div>
-                <label className="text-lg font-semibold">Email</label>
+                <label htmlFor="email" className="text-lg font-semibold">
+                  Email
+                </label>
               </div>
               <div>
                 <input
-                  className="rounded-sm ps-2 py-1 text-lg"
-                  {...register("email")}
+                  type="email"
+                  id="email"
+                  value={email}
+                  required
+                  className="rounded-sm p-2 py-1 text-lg"
+                  onChange={(e) => dispatch(setEmail(e.target.value))}
                 />
               </div>
             </div>
             <div className="space-y-2">
               <div>
-                <label className="text-lg font-semibold">Password</label>
+                <label htmlFor="password" className="text-lg font-semibold">
+                  Password
+                </label>
               </div>
               <div>
                 <input
-                  className="rounded-sm ps-2 py-1 text-lg"
-                  {...register("password")}
+                  type="password"
+                  id="password"
+                  value={password}
+                  required
+                  className="rounded-sm p-2 py-1 text-lg"
+                  onChange={(e) => dispatch(setPassword(e.target.value))}
                 />
               </div>
             </div>

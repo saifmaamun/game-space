@@ -29,10 +29,20 @@ const registerSlice = createSlice({
     setAddress: (state, action: PayloadAction<string>) => {
       state.address = action.payload;
     },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    resetForm: (state) => {
+      return initialState;
+    },
   },
 });
 
-export const { setName, setEmail, setPassword, setAddress, setPhone } =
-  registerSlice.actions;
+export const {
+  setName,
+  setEmail,
+  setPassword,
+  setAddress,
+  setPhone,
+  resetForm,
+} = registerSlice.actions;
 
 export default registerSlice.reducer;
