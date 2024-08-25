@@ -58,7 +58,7 @@ const Navbar = () => {
                     className="rounded-lg backdrop-blur-[2px] p-1 inline-block  hover:text-orange-500"
                     to={"/login"}
                   >
-                    Logout
+                    Login
                   </Link>
                 </li>
 
@@ -103,7 +103,7 @@ const Navbar = () => {
         <div className="md:hidden flex items-center">
           <button
             onClick={handleMenuToggle}
-            className="text-white focus:outline-none"
+            className="text-orange-600  focus:outline-none"
           >
             <svg
               className="w-6 h-6"
@@ -144,45 +144,51 @@ const Navbar = () => {
             </Link>
           </li>
 
-          <li>
-            <Link
-              className="rounded-lg backdrop-blur-[2px] p-1 inline-block  hover:text-orange-500"
-              to={"/login"}
-            >
-              login
-            </Link>
-          </li>
+          {!user.email ? (
+            <>
+              <li>
+                <Link
+                  className="rounded-lg backdrop-blur-[2px] p-1 inline-block  hover:text-orange-500"
+                  to={"/login"}
+                >
+                  Login
+                </Link>
+              </li>
 
-          <li>
-            <Link
-              className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
-              to={"/register"}
-            >
-              Register
-            </Link>
-          </li>
+              <li>
+                <Link
+                  className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
+                  to={"/register"}
+                >
+                  Register
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="relative">
+                <Link
+                  className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
+                  to={"/cart"}
+                >
+                  <ShoppingCart size={24} />
+                </Link>
+                <span className="rounded-full absolute top-[-10px] left-[20px] bg-primary text-white text-center size-[25px]">
+                  {}
+                </span>
+              </li>
 
-          <li className="relative">
-            <Link
-              className="rounded-lg backdrop-blur-[2px] p-1 inline-block"
-              to={"/cart"}
-              onClick={handleMenuToggle}
-            >
-              <ShoppingCart size={24} />
-            </Link>
-            <span className="rounded-full absolute top-[-10px] left-[20px] bg-primary text-white text-center size-[25px]">
-              2
-            </span>
-          </li>
-
-          <li>
-            <Link
-              className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
-              to={"/register"}
-            >
-              Logout
-            </Link>
-          </li>
+              <li>
+                <Link
+                  className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
+                  to={"/login"}
+                  onClick={() => dispatch(logout())}
+                >
+                  Logout
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       )}
     </header>
