@@ -37,11 +37,14 @@ const Login = () => {
     dispatch(resetForm());
   };
   return (
-    <div className="mt-56 px-10 py-20 bg-indigo-950 rounded-lg">
+    <div className="mt-20 px-10 py-20 bg-indigo-950 rounded-lg">
       <div className="w-full flex-1 md:flex  justify-around items-center">
         <div className="text-white w-1/2 mb-4">
           <div className="space-y-4">
-            <h1 className="text-6xl font-semibold">Welcome Back!</h1>
+            <h1 className="text-6xl font-bold">
+              {" "}
+              <span className="text-orange-600">Welcome</span> Back!
+            </h1>
             <p className="text-lg">
               Book your favorite sports facilities in a few clicks. Keep track
               of your bookings, manage your profile, and enjoy hassle-free
@@ -81,14 +84,16 @@ const Login = () => {
                   id="password"
                   value={password}
                   required
-                  className="rounded-sm p-2 py-1 text-lg"
+                  className="rounded-sm p-2 mb-2 py-1 text-lg"
                   onChange={(e) => dispatch(setPassword(e.target.value))}
                 />
               </div>
             </div>
-            <Button className="mt-4 text-lg">
+
+            <Button className="text-lg bg-indigo-950 ">
               <input type="submit" />
             </Button>
+
             <div className="pt-4  ">
               <Link to="/register" className="font-semibold">
                 <p>New Here! Need an Account?</p>

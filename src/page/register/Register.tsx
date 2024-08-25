@@ -60,7 +60,7 @@ const Register = () => {
     // console.log(name, address, email, password, phone, role);
   };
   return (
-    <div className="mt-56 px-10 py-20 bg-indigo-950 rounded-lg">
+    <div className="mt-20 px-10 py-20 bg-indigo-950 rounded-lg">
       <div className="w-full flex-1 md:flex  justify-around items-center">
         <div className="text-white w-1/2 mb-4">
           <div className="space-y-4">
@@ -156,7 +156,7 @@ const Register = () => {
                   id="address"
                   value={address}
                   required
-                  className="rounded-sm p-2 py-1 text-lg"
+                  className="rounded-sm p-2 py-1 mb-2 text-lg"
                   onChange={(e) => dispatch(setAddress(e.target.value))}
                 />
               </div>
