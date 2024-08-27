@@ -46,9 +46,9 @@ const Navbar = () => {
             <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
-                to={"/products"}
+                to={"/facility"}
               >
-                Products
+                Facilities
               </Link>
             </li>
             {!user.email ? (
@@ -138,9 +138,9 @@ const Navbar = () => {
           <li>
             <Link
               className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
-              to={"/products"}
+              to={"/facility"}
             >
-              Products
+              Facilities
             </Link>
           </li>
 

@@ -4,6 +4,9 @@ import Home from "../page/Home/Home";
 import Login from "../page/login/Login";
 import Register from "../page/register/Register";
 import NotFound from "../page/NotFound/NotFound";
+import Facility from "../page/Facility/Facility";
+import FacilityDetails from "../page/FacilityDetails/FacilityDetails";
+import Booking from "../page/Booking/Booking";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +25,23 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/facility",
+        element: <Facility />,
+      },
+      {
+        path: "/facility/:id",
+        element: <FacilityDetails />,
+        // element: (
+        //   <PrivateRoute>
+        //     <ProductDetails />
+        //   </PrivateRoute>
+        // ),
+      },
+      {
+        path: "/booking",
+        element: <Booking />,
       },
       {
         path: "*",

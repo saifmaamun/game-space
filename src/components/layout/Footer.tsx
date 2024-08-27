@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const Footer = () => {
   return (
-    <div className="bg-indigo-950 mt-12 pt-12 pb-8 text-white">
+    <div className="bg-indigo-950 mt-24 pt-12 pb-8  text-white">
       <div className="text-center pb-10 space-y-4">
         <h1 className="text-3xl font-bold">
           We Welcome Your <span className="text-orange-600">Passion </span> And{" "}
@@ -12,13 +12,13 @@ const Footer = () => {
         <p className="text-xl text-gray-400 ">
           Join our empowering sports community today and grow with us.
         </p>
-        <Button className="py-8 px-8 text-xl rounded-xl  font-bold hover:bg-orange-600 ">
+        <Button className="py-8 px-8 text-xl rounded-xl border bg-transparent  font-bold hover:bg-orange-600  hover:text-indigo-950">
           <Link to="/register"> Join With Us</Link>
         </Button>
       </div>
       <div className="container border-t-2 border-indigo-900 py-10">
-        <div className="flex gap-2 justify-center text-white  items-top">
-          <div className="flex-1">
+        <div className=" flex-1 md:flex  gap-2 justify-evenly text-white  items-top">
+          <div className="">
             <h1 className="text-2xl font-semibold mb-6">Contact Us</h1>
             <p className="text-lg  text-gray-400 ">Toll Free Customer Care</p>
             <p className="text-lg mb-6 ">+01304568798</p>
@@ -31,7 +31,8 @@ const Footer = () => {
               <div>linked</div>
             </div>
           </div>
-          <div className="flex-1 ">
+
+          <div className=" ">
             <h1 className="text-2xl font-semibold mb-4">Quick Links</h1>
             <p className="mt-4 text-lg text-gray-400 hover:text-orange-600">
               <Link to="/">About</Link>
@@ -49,7 +50,8 @@ const Footer = () => {
               <Link to="/">Contact us</Link>
             </p>
           </div>
-          <div className="flex-1">
+
+          <div className="">
             <h1 className="text-2xl font-semibold mb-4">Support</h1>
             <p className="mt-4 text-lg text-gray-400 hover:text-orange-600">
               <Link to="/">Contact Us</Link>
@@ -67,7 +69,8 @@ const Footer = () => {
               <Link to="/">Pricing</Link>
             </p>
           </div>
-          <div className="flex-1">
+
+          <div className="">
             <h1 className="text-2xl font-semibold mb-4">Other Links</h1>
             <p className="mt-4 text-lg text-gray-400 hover:text-orange-600">
               <Link to="/">Coaches</Link>
@@ -86,7 +89,7 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="flex-1">
+          <div className="">
             <h1 className="text-2xl font-semibold mb-4">Our Locations</h1>
             <p className="mt-4 text-lg text-gray-400 hover:text-orange-600">
               <Link to="/">Germany</Link>

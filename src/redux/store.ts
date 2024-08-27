@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import registerReducer from "./features/register/registerSlice";
 import loginReducer from "./features/login/loginSlice";
+import facilityReducer from "./features/facility/facilitySlice";
 import { baseApi } from "./api/apiSlice";
 import userReducer from "./features/user/userSlice";
+import bookingReducer from "./features/booking/bookingSlice";
+import avaibilatyReducer from "./features/availablity/availabilitySlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -11,14 +14,25 @@ const persistUserConfig = {
   key: "user",
   storage,
 };
+const persistFacilityConfig = {
+  key: "facility",
+  storage,
+};
 
 const persistedUserReducer = persistReducer(persistUserConfig, userReducer);
+const persistedFacilityReducer = persistReducer(
+  persistFacilityConfig,
+  facilityReducer
+);
 
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
     register: registerReducer,
     login: loginReducer,
+    availability: avaibilatyReducer,
+    booking: bookingReducer,
+    facility: persistedFacilityReducer,
     user: persistedUserReducer,
   },
   middleware: (getDefaultMiddleware) =>

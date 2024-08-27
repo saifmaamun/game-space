@@ -2,7 +2,7 @@ import MainLayout from "./components/layout/MainLayout";
 
 function App() {
   return (
-    <div className=" min-h-screen w-full ">
+    <div className=" min-h-screen w-full  ">
       <MainLayout />
     </div>
   );

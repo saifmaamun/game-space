@@ -29,20 +29,19 @@ const Login = () => {
     if (data) {
       const token: string = data?.token;
       const user = jwtDecode(token);
+      dispatch(setToken(token));
       dispatch(setUser(user));
-      dispatch(setToken(setToken));
       navigate("/");
     }
 
     dispatch(resetForm());
   };
   return (
-    <div className="mt-20 px-10 py-20 bg-indigo-950 rounded-lg">
+    <div className="my-20 px-10 py-20 bg-indigo-950 rounded-lg">
       <div className="w-full flex-1 md:flex  justify-around items-center">
         <div className="text-white w-1/2 mb-4">
           <div className="space-y-4">
             <h1 className="text-6xl font-bold">
-              {" "}
               <span className="text-orange-600">Welcome</span> Back!
             </h1>
             <p className="text-lg">

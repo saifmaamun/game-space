@@ -51,7 +51,7 @@ const Register = () => {
         const token: string = data?.token;
         const user = jwtDecode(token);
         dispatch(setUser(user));
-        dispatch(setToken(setToken));
+        dispatch(setToken(token));
         navigate("/");
       }
     }
