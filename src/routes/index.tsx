@@ -7,6 +7,7 @@ import NotFound from "../page/NotFound/NotFound";
 import Facility from "../page/Facility/Facility";
 import FacilityDetails from "../page/FacilityDetails/FacilityDetails";
 import Booking from "../page/Booking/Booking";
+import BookedDetails from "../page/BookedDetails/BookedDetails";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ export const router = createBrowserRouter([
       {
         path: "/booking",
         element: <Booking />,
+      },
+      {
+        path: "/booking/details",
+        element: <BookedDetails />,
       },
       {
         path: "*",

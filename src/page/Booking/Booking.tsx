@@ -12,7 +12,7 @@ import {
   setBookingFacility,
   setBookingStartTime,
 } from "../../redux/features/booking/bookingSlice";
-import { usePlaceBookingMutation } from "../../redux/features/booking/bookingApi";
+import ConfarmationModal from "../../components/ui/ConfarmationModal";
 
 const Booking = () => {
   // hooks
@@ -25,7 +25,7 @@ const Booking = () => {
   // getting the states
   const { facility, date } = useAppSelector((state) => state.availability);
   const availablityData = { date, facility };
-  const bookingData = useAppSelector((state) => state.booking);
+  const { endTime } = useAppSelector((state) => state.booking);
 
   // all query & mutations
   const { data: facilityData } = useGetSingleFacilityQuery(id);
@@ -37,7 +37,8 @@ const Booking = () => {
     },
     { skip: !date }
   );
-  const [placeBooking, { data }] = usePlaceBookingMutation();
+  //   const [placeBooking, { data, isLoading, isError }] =
+  //     usePlaceBookingMutation();
 
   //   set start and end time
   const bookingTimeSet = (text: string) => {
@@ -48,9 +49,9 @@ const Booking = () => {
   };
 
   //   booking
-  const booking = () => {
-    placeBooking(bookingData);
-  };
+  //   const booking = () => {
+  //     placeBooking(bookingData);
+  //   };
 
   return (
     <div className="text-center">
@@ -130,27 +131,37 @@ const Booking = () => {
               <h1 className="text-4xl mb-4 font-bold">Available Slots</h1>
               {availableSlots ? (
                 <div className="grid grid-cols-1 text-center gap-4 text-black sm:grid-cols-2">
-                  {availableSlots?.data.map((slot) => (
-                    <Button
-                      className="bg-white text-black font-semibold text-md hover:text-white px-4 py-2  rounded-md"
-                      onClick={(e) => bookingTimeSet(e.target.innerHTML)}
-                    >
-                      {slot.startTime} - {slot.endTime}
-                    </Button>
-                  ))}
+                  {availableSlots?.data.map(
+                    (slot: { startTime: string; endTime: string }) => (
+                      <Button
+                        className="bg-white text-black font-semibold text-md hover:text-white px-4 py-2  rounded-md"
+                        onClick={(e) =>
+                          bookingTimeSet(
+                            (e.target as HTMLButtonElement).innerHTML
+                          )
+                        }
+                      >
+                        {slot.startTime} - {slot.endTime}
+                      </Button>
+                    )
+                  )}
                 </div>
               ) : (
-                <h1>Loading</h1>
+                <h1>Select a Date First</h1>
               )}
             </div>
-            <div className="text-center ">
-              <Button
+
+            {endTime && (
+              <div className="text-center ">
+                <ConfarmationModal />
+                {/* <Button
                 onClick={booking}
                 className="text-lg  w-full bg-indigo-950"
               >
                 Book
-              </Button>
-            </div>
+              </Button> */}
+              </div>
+            )}
           </div>
         </div>
       </div>
