@@ -76,13 +76,10 @@ const Navbar = () => {
                 <li className="relative">
                   <Link
                     className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
-                    to={"/cart"}
+                    to={"/dashboard"}
                   >
-                    <ShoppingCart size={24} />
+                    Dashboard
                   </Link>
-                  <span className="rounded-full absolute top-[-10px] left-[20px] bg-primary text-white text-center size-[25px]">
-                    {}
-                  </span>
                 </li>
 
                 <li>
