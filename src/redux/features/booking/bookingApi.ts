@@ -9,7 +9,25 @@ const availabilityApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    usersBooking: builder.query({
+      query: () => ({
+        url: `/bookings/user`,
+        method: "Get",
+      }),
+      providesTags: ["UserBookingData"],
+    }),
+    cancelBooking: builder.mutation({
+      query: (id) => ({
+        url: `/bookings/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["UserBookingData"],
+    }),
   }),
 });
 
-export const { usePlaceBookingMutation } = availabilityApi;
+export const {
+  usePlaceBookingMutation,
+  useUsersBookingQuery,
+  useCancelBookingMutation,
+} = availabilityApi;

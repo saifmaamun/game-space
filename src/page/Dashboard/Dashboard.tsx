@@ -1,6 +1,7 @@
 import { MenuIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
 
 // const Dashboard = () => {
 //   return (
@@ -39,6 +40,10 @@ import { Link, Outlet } from "react-router-dom";
 //   );
 // };
 const Dashboard = () => {
+  // user role
+  const { role } = useAppSelector((state) => state.user.user);
+  console.log(role);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -70,40 +75,54 @@ const Dashboard = () => {
                 Welcome
               </Link>
             </li>
+            {role == "user" ? (
+              <li className="mb-2">
+                <Link
+                  to="/dashboard/mybookings"
+                  className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
+                  onClick={handleLinkClick} // Close sidebar on link click
+                >
+                  My Bookings
+                </Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard/allfacility"
+                    className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
+                    onClick={handleLinkClick} // Close sidebar on link click
+                  >
+                    All Facility
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/allbookings"
+                    className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
+                    onClick={handleLinkClick} // Close sidebar on link click
+                  >
+                    All Booking
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/addadmin"
+                    className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
+                    onClick={handleLinkClick} // Close sidebar on link click
+                  >
+                    Add Admin
+                  </Link>
+                </li>
+              </>
+            )}
             <li className="mb-2">
               <Link
-                to="/dashboard/mybookings"
+                to="/"
                 className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
                 onClick={handleLinkClick} // Close sidebar on link click
               >
-                My Bookings
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/allfacility"
-                className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
-                onClick={handleLinkClick} // Close sidebar on link click
-              >
-                All Facility
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/allbookings"
-                className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
-                onClick={handleLinkClick} // Close sidebar on link click
-              >
-                All Booking
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/dashboard/addadmin"
-                className="block py-2 px-4 rounded hover:bg-indigo-950 font-semibold"
-                onClick={handleLinkClick} // Close sidebar on link click
-              >
-                Add Admin
+                Home
               </Link>
             </li>
           </ul>
