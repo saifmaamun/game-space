@@ -77,7 +77,7 @@ export const router = createBrowserRouter([
             element: <AllBooking />,
           },
           {
-            path: "addfacility",
+            path: "allfacility/addfacility",
             element: <AddFacility />,
           },
           {

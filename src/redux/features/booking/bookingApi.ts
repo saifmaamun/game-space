@@ -9,6 +9,12 @@ const availabilityApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    allBooking: builder.query({
+      query: () => ({
+        url: `/bookings`,
+        method: "Get",
+      }),
+    }),
     usersBooking: builder.query({
       query: () => ({
         url: `/bookings/user`,
@@ -30,4 +36,5 @@ export const {
   usePlaceBookingMutation,
   useUsersBookingQuery,
   useCancelBookingMutation,
+  useAllBookingQuery,
 } = availabilityApi;
