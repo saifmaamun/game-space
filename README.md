@@ -1,5 +1,13 @@
 # Game Space
 
+## [Live Link](https://github.com)
+
+## [frontend github](https://github.com/saifmaamun/game-space)
+
+## [Server Link](https://gameplan-mu.vercel.app/)
+
+## [backend github](https://github.com/saifmaamun/gameplan)
+
 ## Introduction
 
 Welcome to the **Game Space**! This project allows users to easily book sports facilities, view schedules, and manage their profiles seamlessly.
