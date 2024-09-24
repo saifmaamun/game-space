@@ -1,6 +1,7 @@
 import CustomerFeedback from "../../components/ui/CustomerFeedback";
-import FeaturedFacilities from "../../components/ui/Featuredfacilities";
+import FeaturedFacilities from "../../components/ui/FeaturedFacilities";
 import HeroSection from "../../components/ui/HeroSection";
+import HowItWorks from "../../components/ui/HowItWorks";
 
 const Home = () => {
   // Scroll to Top Button
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
       <HeroSection />
       <FeaturedFacilities />
+      <HowItWorks />
       <CustomerFeedback />
     </div>
   );
