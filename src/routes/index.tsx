@@ -17,6 +17,8 @@ import AddFacility from "../page/Dashboard/AddFacility/AddFacility";
 import AddAdmin from "../page/Dashboard/AddAdmin/AddAdmin";
 import Dashboard from "../page/Dashboard/Dashboard";
 import EditFacility from "../page/Dashboard/EditFacility/EditFacility";
+import AboutUs from "../page/AboutUs/AboutUs";
+import ContactUs from "../page/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
       },
       {
         path: "/facility",

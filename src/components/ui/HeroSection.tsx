@@ -7,7 +7,8 @@ const HeroSection = () => {
     <div className="relative isolate px-6 pt-8 lg:px-8">
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        className="absolute inset-x-0 -top-40 -z-10 transform-gpu  blur-3xl sm:-top-40"
+        // className="absolute pt-32 inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
       >
         <div
           style={{

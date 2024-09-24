@@ -16,7 +16,7 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <header className="  text-black font-semibold rounded-sm px-3 ">
+    <header className="  text-black font-semibold rounded-sm px-3 mb-8">
       <nav className="container mx-auto flex items-center justify-between space-x-10 py-12">
         <Link to={"/"}>
           <div className="flex align-middle justify-center">
@@ -54,7 +54,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
-                to={"/facility"}
+                to={"/about"}
               >
                 About Us
               </Link>
@@ -62,7 +62,7 @@ const Navbar = () => {
             <li>
               <Link
                 className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
-                to={"/facility"}
+                to={"/contact"}
               >
                 Contact Us
               </Link>
