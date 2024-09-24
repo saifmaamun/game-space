@@ -1,12 +1,12 @@
 # Game Space
 
-## [Live Link](https://github.com)
+### [Live Link](https://github.com)
 
-## [frontend github](https://github.com/saifmaamun/game-space)
+### [frontend github](https://github.com/saifmaamun/game-space)
 
-## [Server Link](https://gameplan-mu.vercel.app/)
+### [Server Link](https://gameplan-mu.vercel.app/)
 
-## [backend github](https://github.com/saifmaamun/gameplan)
+### [backend github](https://github.com/saifmaamun/gameplan)
 
 ## Introduction
 
