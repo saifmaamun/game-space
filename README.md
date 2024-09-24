@@ -1,50 +1,74 @@
-# React + TypeScript + Vite
+# Game Space
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+Welcome to the **Game Space**! This project allows users to easily book sports facilities, view schedules, and manage their profiles seamlessly.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Description
 
-## Expanding the ESLint configuration
+**Game Space** is designed to provide a user-friendly interface for booking sports facilities. The goal of this project is to simplify the process of scheduling and managing bookings for users and facility owners. Whether you’re a sports enthusiast looking to reserve a court or a facility manager wanting to streamline bookings, this application serves both needs effectively.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- User registration and authentication
+- Facility booking with available time slots
+- Viewing schedules for facilities
+- Managing user profiles and booking history
+- Search functionality to filter facilities by name
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Technology Stack
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+This project utilizes the following technologies:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- **Frontend:** React, Redux, TypeScript,
+- **Backend:** Node.js, Express.js,TypeScript,
+- **Database:** MongoDB, Mongoose,
+- **Deployment:** Vercel
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## Installation Guideline
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Node.js (version 14.x or higher)
+- MongoDB (for local development, if applicable)
+
+### Installation Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/saifmaamun/game-space
+   ```
+2. **Navigate to the project directory:**
+   ```bash
+   cd game-space
+   ```
+3. **Install the dependencies**
+   ```bash
+   npm install
+   ```
+
+### Configuration
+
+1. **Create a .env file in the root directory of the project.**
+2. **Add the necessary configuration variables in the .env file. Example:**
+
+   ```bash
+   PORT=3000
+   DB_URL=your_db_connection_uri
+   API_KEY=your_api_key_here
+   ```
+
+3. **Configuration Requirements**
+
+   - Obtain your MongoDB connection URI and replace your_db_connection_uri with it.
+   - If you're using any third-party services, ensure you add the corresponding API keys.
+
+## Usage
+
+### To start the application, run the following command:
+
+```bash
+   npm run dev
 ```
