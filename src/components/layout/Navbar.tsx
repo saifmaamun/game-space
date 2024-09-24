@@ -51,6 +51,23 @@ const Navbar = () => {
                 Facilities
               </Link>
             </li>
+            <li>
+              <Link
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
+                to={"/facility"}
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="rounded-lg backdrop-blur-[2px] p-1 inline-block hover:text-orange-500"
+                to={"/facility"}
+              >
+                Contact Us
+              </Link>
+            </li>
+
             {!user.email ? (
               <>
                 <li>

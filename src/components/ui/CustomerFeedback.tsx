@@ -34,7 +34,7 @@ const testimonials = [
 
 const TestimonialCard = ({ name, testimonial, rating }) => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md">
+    <div className="bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       <p className="text-gray-700 italic">"{testimonial}"</p>
       <div className="flex justify-between items-center mt-4">
         <span className="font-bold">{name}</span>
@@ -50,7 +50,7 @@ const TestimonialCard = ({ name, testimonial, rating }) => {
 const CustomerFeedback = () => {
   return (
     <div className="my-12 py-16">
-      <h1 className="text-4xl font-bold text-indigo-950 mb-6">
+      <h1 className="text-4xl font-bold text-indigo-950 mb-10">
         What Our Customers Say
       </h1>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">
