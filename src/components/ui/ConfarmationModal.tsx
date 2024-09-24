@@ -19,10 +19,21 @@ const ConfarmationModal = () => {
   const [placeBooking, { data }] = usePlaceBookingMutation();
 
   //   booking
-  const booking = () => {
-    placeBooking(bookingData);
+  const booking = async () => {
+    try {
+      const res = await placeBooking(bookingData);
 
-    navigate("/booking/details");
+      if (res.data.success) {
+        window.location.href = res.data.data.payment_url;
+      } else {
+        console.error("Order creation failed:", res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // await placeBooking(bookingData);
+
+    // navigate("/booking/details");
   };
 
   return (

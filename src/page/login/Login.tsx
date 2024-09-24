@@ -9,7 +9,11 @@ import {
 } from "../../redux/features/login/loginSlice";
 import { jwtDecode } from "jwt-decode";
 
-import { setToken, setUser } from "../../redux/features/user/userSlice";
+import {
+  setToken,
+  setUser,
+  setUserName,
+} from "../../redux/features/user/userSlice";
 
 const Login = () => {
   // hooks
@@ -27,10 +31,12 @@ const Login = () => {
 
     const { data } = await login(loginData);
     if (data) {
+      console.log(data?.data?.userWithoutPassword);
       const token: string = data?.token;
       const user = jwtDecode(token);
       dispatch(setToken(token));
       dispatch(setUser(user));
+      dispatch(setUserName(data?.data?.userWithoutPassword?.name));
       navigate("/");
     }
 

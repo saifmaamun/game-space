@@ -8,6 +8,7 @@ const registerApi = baseApi.injectEndpoints({
         method: "POST",
         body: userInfo,
       }),
+      invalidatesTags: ["Users"],
     }),
   }),
 });

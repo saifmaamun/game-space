@@ -3,8 +3,10 @@ import { RootState } from "../../store";
 
 const initialState = {
   token: "",
+
   user: {
     email: "",
+    name: "",
     role: "",
     exp: "",
     iat: "",
@@ -20,10 +22,14 @@ const userSlice = createSlice({
     setUser: (state, action) => {
       state.user = { ...action.payload };
     },
+    setUserName: (state, action) => {
+      state.user.name = action.payload;
+    },
     logout: (state) => {
       state.token = "";
       state.user = {
         email: "",
+        name: "",
         role: "",
         exp: "",
         iat: "",
@@ -32,6 +38,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setToken, setUser, logout } = userSlice.actions;
+export const { setToken, setUserName, setUser, logout } = userSlice.actions;
 export const selectAuthToken = (state: RootState) => state.user.token;
 export default userSlice.reducer;

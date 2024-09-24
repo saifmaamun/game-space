@@ -19,9 +19,9 @@ const AllBooking = () => {
 
   return (
     <div className="bg-indigo-950  text-white px-8 py-8 rounded-xl w-full">
-      <h1 className="text-2xl font-bold"> My Booking {data?.data.length}</h1>
+      <h1 className="text-2xl font-bold"> All Bookings</h1>
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption>A list of all bookings.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="">User</TableHead>
@@ -52,12 +52,6 @@ const AllBooking = () => {
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter>
       </Table>
     </div>
   );

@@ -11,7 +11,7 @@ export default function MainLayout() {
   return (
     <div>
       {!isDashboard && <Navbar />}
-      <div className="pt-16">
+      <div className="pt-16 px-4">
         <Container>
           <Outlet />
         </Container>

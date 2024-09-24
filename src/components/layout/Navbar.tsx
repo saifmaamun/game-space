@@ -17,7 +17,7 @@ const Navbar = () => {
   };
   return (
     <header className="  text-black font-semibold rounded-sm px-3 ">
-      <nav className="container mx-auto flex items-center justify-between space-x-10 py-4">
+      <nav className="container mx-auto flex items-center justify-between space-x-10 py-12">
         <Link to={"/"}>
           <div className="flex align-middle justify-center">
             <svg

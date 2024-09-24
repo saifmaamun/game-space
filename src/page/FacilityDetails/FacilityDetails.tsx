@@ -34,7 +34,7 @@ const FacilityDetails = () => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              className="size-6"
+              className="size-6 text-orange-600"
             >
               <path
                 stroke-linecap="round"

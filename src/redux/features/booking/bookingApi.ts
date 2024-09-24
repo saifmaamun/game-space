@@ -9,12 +9,14 @@ const availabilityApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+
     allBooking: builder.query({
       query: () => ({
         url: `/bookings`,
         method: "Get",
       }),
     }),
+
     usersBooking: builder.query({
       query: () => ({
         url: `/bookings/user`,
@@ -22,6 +24,7 @@ const availabilityApi = baseApi.injectEndpoints({
       }),
       providesTags: ["UserBookingData"],
     }),
+
     cancelBooking: builder.mutation({
       query: (id) => ({
         url: `/bookings/${id}`,

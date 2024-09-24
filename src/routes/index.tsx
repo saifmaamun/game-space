@@ -16,6 +16,7 @@ import AllBooking from "../page/Dashboard/AllBooking/AllBooking";
 import AddFacility from "../page/Dashboard/AddFacility/AddFacility";
 import AddAdmin from "../page/Dashboard/AddAdmin/AddAdmin";
 import Dashboard from "../page/Dashboard/Dashboard";
+import EditFacility from "../page/Dashboard/EditFacility/EditFacility";
 
 export const router = createBrowserRouter([
   {
@@ -77,8 +78,12 @@ export const router = createBrowserRouter([
             element: <AllBooking />,
           },
           {
-            path: "allfacility/addfacility",
+            path: "addfacility",
             element: <AddFacility />,
+          },
+          {
+            path: "editfacility/:id",
+            element: <EditFacility />,
           },
           {
             path: "addadmin",

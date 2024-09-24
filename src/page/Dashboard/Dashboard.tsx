@@ -3,46 +3,9 @@ import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 
-// const Dashboard = () => {
-//   return (
-//     <div className="md:flex flex-1 justify-center items-center space-x-12  ">
-//       <div className="grid-cols-3 w-1/4 bg-orange-600 rounded-3xl">
-//         <div className="mx-auto space-y-4 h-screen py-24 px-12">
-//           <div>
-//             <Link to="/dashboard" className="text-xl font-semibold">
-//               Dashboard
-//             </Link>
-//           </div>
-//           <div>
-//             <Link to="/dashboard" className="text-xl font-semibold">
-//               My Bookings
-//             </Link>
-//           </div>
-//           <div>
-//             <Link to="/dashboard" className="text-xl font-semibold">
-//               Facility Management
-//             </Link>
-//           </div>
-//           <div>
-//             <Link to="/dashboard" className="text-xl font-semibold">
-//               Booking Management
-//             </Link>
-//           </div>
-//           <div>
-//             <Link to="/dashboard" className="text-xl font-semibold">
-//               Add Admin
-//             </Link>
-//           </div>
-//         </div>
-//       </div>
-//       <div className="grid-cols-9 w-3/4 "> 3</div>
-//     </div>
-//   );
-// };
 const Dashboard = () => {
   // user role
   const { role } = useAppSelector((state) => state.user.user);
-  console.log(role);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

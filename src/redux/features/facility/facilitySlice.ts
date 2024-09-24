@@ -6,6 +6,12 @@ export interface IFacilityState {
   pricePerHour: number;
   location: string;
   isDeleted: boolean;
+  oldData: {
+    name: string;
+    description: string;
+    pricePerHour: number;
+    location: string;
+  };
 }
 
 const initialState: IFacilityState = {
@@ -15,6 +21,12 @@ const initialState: IFacilityState = {
   pricePerHour: 0,
   location: "",
   isDeleted: false,
+  oldData: {
+    name: "",
+    description: "",
+    pricePerHour: 0,
+    location: "",
+  },
 };
 
 const facilitySlice = createSlice({
@@ -36,6 +48,12 @@ const facilitySlice = createSlice({
     setFacilityLocation: (state, action) => {
       state.location = action.payload;
     },
+    setOldFacility: (state, action) => {
+      state.oldData.name = action.payload.name;
+      state.oldData.description = action.payload.description;
+      state.oldData.location = action.payload.location;
+      state.oldData.pricePerHour = action.payload.pricePerHour;
+    },
     resetFacility: (state) => {
       state.name = "";
       state.description = "";
@@ -51,6 +69,7 @@ export const {
   setFacilityLocation,
   setFacilityName,
   setFacilityPrice,
+  setOldFacility,
   resetFacility,
 } = facilitySlice.actions;
 

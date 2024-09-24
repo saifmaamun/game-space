@@ -1,7 +1,11 @@
+import FeaturedFacilities from "../../components/ui/Featuredfacilities";
+import HeroSection from "../../components/ui/HeroSection";
+
 const Home = () => {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Home!</h1>
+      <HeroSection />
+      <FeaturedFacilities />
     </div>
   );
 };

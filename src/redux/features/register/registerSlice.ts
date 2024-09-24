@@ -29,6 +29,7 @@ const registerSlice = createSlice({
     setAddress: (state, action: PayloadAction<string>) => {
       state.address = action.payload;
     },
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     resetForm: (state) => {
       return initialState;
