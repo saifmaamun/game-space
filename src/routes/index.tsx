@@ -19,6 +19,7 @@ import Dashboard from "../page/Dashboard/Dashboard";
 import EditFacility from "../page/Dashboard/EditFacility/EditFacility";
 import AboutUs from "../page/AboutUs/AboutUs";
 import ContactUs from "../page/ContactUs/ContactUs";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -52,13 +53,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/facility/:id",
-        element: <FacilityDetails />,
-        // element: (
-        //   <PrivateRoute>
-        //     <ProductDetails />
-        //   </PrivateRoute>
-        // ),
+        element: (
+          <PrivateRoute>
+            element: <FacilityDetails />,
+          </PrivateRoute>
+        ),
       },
+
       {
         path: "/booking",
         element: <Booking />,
@@ -69,7 +70,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PrivateRoute>
+            element: <Dashboard />,
+          </PrivateRoute>
+        ),
         children: [
           {
             index: true,
