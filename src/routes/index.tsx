@@ -1,4 +1,4 @@
-import { createBrowserRouter, Route, Routes } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../page/Home/Home";
 import Login from "../page/login/Login";
@@ -72,7 +72,7 @@ export const router = createBrowserRouter([
         path: "/dashboard",
         element: (
           <PrivateRoute>
-            element: <Dashboard />,
+            <Dashboard />,
           </PrivateRoute>
         ),
         children: [

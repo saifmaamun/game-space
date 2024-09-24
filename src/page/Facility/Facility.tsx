@@ -10,6 +10,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "../../components/ui/pagination";
+import { IFacility } from "../../types/facility";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -24,10 +25,10 @@ const Facility = () => {
 
   // Filtered facilities based on the search term and price
   const filteredFacilities = data?.data
-    .filter((facility) =>
+    .filter((facility: IFacility) =>
       facility.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    .filter((facility) => facility.pricePerHour <= maxPrice);
+    .filter((facility: IFacility) => facility.pricePerHour <= maxPrice);
 
   // Calculate total facilities and pages
 
@@ -91,8 +92,8 @@ const Facility = () => {
         ))} */}
 
         {currentFacilities?.length > 0 ? (
-          currentFacilities.map((facility) => (
-            <FacilityCard key={facility.id} facility={facility} />
+          currentFacilities.map((facility: IFacility) => (
+            <FacilityCard key={facility._id} facility={facility} />
           ))
         ) : (
           <p>No facilities found.</p>
@@ -107,7 +108,7 @@ const Facility = () => {
               <PaginationPrevious
                 href="#"
                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
+                // disabled={currentPage === 1}
               />
             </PaginationItem>
 
@@ -135,7 +136,7 @@ const Facility = () => {
                 onClick={() =>
                   setCurrentPage((prev) => Math.min(prev + 1, totalPages))
                 }
-                disabled={currentPage === totalPages}
+                // disabled={currentPage === totalPages}
               />
             </PaginationItem>
           </PaginationContent>

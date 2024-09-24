@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
-import fb from "../../assets/facebook-svgrepo-com.svg";
 
 const Footer = () => {
   return (

@@ -1,17 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from "react-router-dom";
 import { Button } from "./button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "./card";
+import { IFacility } from "../../types/facility";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const FacilityCard = ({ facility }: { facility: any }) => {
+const FacilityCard = ({ facility }: { facility: IFacility }) => {
   const { _id, name, description, pricePerHour, location } = facility;
+  console.log(_id, description);
 
   // css properties
   const cardContainerStyle = {
@@ -30,13 +31,14 @@ const FacilityCard = ({ facility }: { facility: any }) => {
     boxShadow: "0 10px 20px rgba(0, 0, 0, 0.2)", // Default shadow
   };
 
-  const handleMouseEnter = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleMouseEnter = (e: { currentTarget: any }) => {
     const card = e.currentTarget;
     card.style.transform = "rotateY(10deg) rotateX(10deg) translateZ(20px)"; // Enhanced tilt
     card.style.boxShadow = "0 25px 50px rgba(0, 0, 0, 0.3)"; // Stronger shadow on hover
   };
-
-  const handleMouseLeave = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleMouseLeave = (e: { currentTarget: any }) => {
     const card = e.currentTarget;
     card.style.transform = "rotateY(0deg) rotateX(0deg) translateZ(0)"; // Reset transform
     card.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.2)"; // Reset shadow

@@ -17,20 +17,22 @@ import {
   setPassword,
   setPhone,
 } from "../../../redux/features/register/registerSlice";
-import { IRegisterFormInput } from "../../../types/userData";
+import { IRegisterFormInput, IUser } from "../../../types/userData";
 import { useSignUpMutation } from "../../../redux/features/register/registerApi";
-
 const AddAdmin = () => {
   // hooks
   const dispatch = useAppDispatch();
-  const { address, email, name, password, phone, role } = useAppSelector(
+  const { address, email, name, password, phone } = useAppSelector(
     (state) => state.register
   );
+
   const [signUp, { data: signinData, error, isError, isSuccess, isLoading }] =
     useSignUpMutation();
 
+  console.log(signinData, error, isError, isSuccess, isLoading);
   // get all users data
   const { data: allUsers } = useGetAllUsersQuery(undefined);
+  console.log(allUsers);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,7 +44,9 @@ const AddAdmin = () => {
       phone,
       role: "admin",
     };
+
     const user = await signUp(userData);
+    console.log(user);
     dispatch(resetForm());
   };
 
@@ -70,7 +74,7 @@ const AddAdmin = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {allUsers?.data.map((user) => (
+              {allUsers?.data.map((user: IUser) => (
                 <TableRow key={user._id}>
                   <TableCell className="font-medium">{user.name}</TableCell>
 

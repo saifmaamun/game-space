@@ -32,7 +32,15 @@ const testimonials = [
   },
 ];
 
-const TestimonialCard = ({ name, testimonial, rating }) => {
+const TestimonialCard = ({
+  name,
+  testimonial,
+  rating,
+}: {
+  name: string;
+  testimonial: string;
+  rating: number;
+}) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
       <p className="text-gray-700 italic">"{testimonial}"</p>

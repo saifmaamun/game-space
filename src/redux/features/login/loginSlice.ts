@@ -17,7 +17,7 @@ const loginSlice = createSlice({
       state.password = action.payload;
     },
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    resetForm: (state) => {
+    resetForm: () => {
       return initialState;
     },
   },

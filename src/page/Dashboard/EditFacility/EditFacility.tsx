@@ -27,6 +27,7 @@ const EditFacility = () => {
 
   const [editFacility, { data: editedFacilityData }] =
     useEditFacilityMutation();
+  console.log(editedFacilityData);
   const { data } = useGetSingleFacilityQuery(id);
   dispatch(setFacilityId(id));
   if (data?.data) {
@@ -171,7 +172,7 @@ const EditFacility = () => {
                 <input
                   type="number"
                   id="price"
-                  placeholder={oldData.pricePerHour}
+                  placeholder={oldData.pricePerHour.toString()}
                   className="rounded-sm p-2 py-1 text-lg"
                   onChange={(e) =>
                     dispatch(setFacilityPrice(parseInt(e.target.value)))

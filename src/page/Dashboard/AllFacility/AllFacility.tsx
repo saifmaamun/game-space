@@ -12,10 +12,10 @@ import {
   useDeleteFacilityMutation,
   useGetFacilityQuery,
 } from "../../../redux/features/facility/facilityApi";
-import { useAppDispatch } from "../../../redux/hooks";
+import { IFacility } from "../../../types/facility";
 const AllFacility = () => {
   // hooks
-  const dispatch = useAppDispatch();
+
   const [deleteFacility] = useDeleteFacilityMutation();
 
   // fetching data
@@ -59,7 +59,7 @@ const AllFacility = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.data.map((facility) => (
+          {data?.data.map((facility: IFacility) => (
             <TableRow key={facility._id}>
               <TableCell className="font-medium">{facility.name}</TableCell>
 

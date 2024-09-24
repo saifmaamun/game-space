@@ -3,7 +3,6 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@radix-ui/react-alert-dialog";
@@ -11,12 +10,11 @@ import { AlertDialogFooter, AlertDialogHeader } from "./alert-dialog";
 import { Button } from "./button";
 import { useAppSelector } from "../../redux/hooks";
 import { usePlaceBookingMutation } from "../../redux/features/booking/bookingApi";
-import { useNavigate } from "react-router-dom";
 
 const ConfarmationModal = () => {
-  const navigate = useNavigate();
   const bookingData = useAppSelector((state) => state.booking);
   const [placeBooking, { data }] = usePlaceBookingMutation();
+  console.log(data);
 
   //   booking
   const booking = async () => {

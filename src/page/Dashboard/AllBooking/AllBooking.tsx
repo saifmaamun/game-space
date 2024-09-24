@@ -1,21 +1,20 @@
-import { Button } from "../../../components/ui/button";
 import {
   Table,
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "../../../components/ui/table";
 import { useAllBookingQuery } from "../../../redux/features/booking/bookingApi";
 import { format } from "date-fns";
+import { IBooking } from "../../../types/bookings";
 
 const AllBooking = () => {
   // fetching data
-  const { data } = useAllBookingQuery(undefined);
-  console.log(data);
+  const { data: bookings } = useAllBookingQuery(undefined);
+  console.log(bookings);
 
   return (
     <div className="bg-indigo-950  text-white px-8 py-8 rounded-xl w-full">
@@ -33,7 +32,7 @@ const AllBooking = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data?.data.map((bookingData) => (
+          {bookings?.data.map((bookingData: IBooking) => (
             <TableRow key={bookingData._id}>
               <TableCell className="font-medium">
                 {bookingData.user.name.toUpperCase()}

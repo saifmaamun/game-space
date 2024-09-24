@@ -20,7 +20,9 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const { email, password } = useAppSelector((state) => state.login);
   const navigate = useNavigate();
+
   const [login, { data }] = useLoginMutation();
+  console.log(data);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

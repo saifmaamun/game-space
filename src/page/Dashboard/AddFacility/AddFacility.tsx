@@ -1,5 +1,5 @@
 import { Button } from "../../../components/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useCreateFacilityMutation } from "../../../redux/features/facility/facilityApi";
 import {
@@ -19,6 +19,7 @@ const AddFacility = () => {
   );
   const [createFacility, { data, isLoading, isError }] =
     useCreateFacilityMutation();
+  console.log(data, isLoading, isError);
 
   // submit form
   const handleSubmit = async (e: React.FormEvent) => {
