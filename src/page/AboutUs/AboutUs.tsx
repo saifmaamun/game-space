@@ -1,3 +1,7 @@
+import doe from "../../assets/doe.png";
+import smith from "../../assets/smith.png";
+import mark from "../../assets/mark.png";
+
 const AboutUs = () => {
   return (
     <div className="my-12 px-6">
@@ -32,7 +36,7 @@ const AboutUs = () => {
           {/* Team Member 1 */}
           <div className="p-6  rounded-md shadow-lg bg-white  transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
             <img
-              src="https://via.placeholder.com/150"
+              src={doe}
               alt="Team Member"
               className="w-32 h-32 mx-auto rounded-full mb-4"
             />
@@ -46,7 +50,7 @@ const AboutUs = () => {
           {/* Team Member 2 */}
           <div className="p-6  rounded-md shadow-lg bg-white  transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
             <img
-              src="https://via.placeholder.com/150"
+              src={smith}
               alt="Team Member"
               className="w-32 h-32 mx-auto rounded-full mb-4"
             />
@@ -60,7 +64,7 @@ const AboutUs = () => {
           {/* Team Member 3 */}
           <div className="p-6  rounded-md shadow-lg bg-white  transform transition-transform duration-300 hover:scale-105 hover:shadow-xl">
             <img
-              src="https://via.placeholder.com/150"
+              src={mark}
               alt="Team Member"
               className="w-32 h-32 mx-auto rounded-full mb-4"
             />

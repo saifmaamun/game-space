@@ -1,12 +1,14 @@
 import { useGetSingleFacilityQuery } from "../../redux/features/facility/facilityApi";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/button";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setFacilityId } from "../../redux/features/facility/facilitySlice";
 
 const FacilityDetails = () => {
-  //   hoosk
+  //   hooks
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
+
   const { id } = useParams();
   //   setting the id for the facility
   dispatch(setFacilityId(id));
@@ -55,13 +57,23 @@ const FacilityDetails = () => {
             {data?.data.description}
           </h3>
         </div>
-        <div>
-          <Link to="/booking">
-            <Button className="py-8 w-full text-xl rounded-xl border bg-indigo-950  font-bold hover:bg-orange-600  hover:text-indigo-950">
-              Book
-            </Button>
-          </Link>
-        </div>
+        {user.role == "user" ? (
+          <div>
+            <Link to="/booking">
+              <Button className="py-8 w-full text-xl rounded-xl border bg-indigo-950  font-bold hover:bg-orange-600  hover:text-indigo-950">
+                Book
+              </Button>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <Link to={`/dashboard/editfacility/${id}`}>
+              <Button className="py-8 w-full text-xl rounded-xl border bg-indigo-950  font-bold hover:bg-orange-600  hover:text-indigo-950">
+                Edit
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
       <div className=" rounded-3xl shadow-2xl">
         <img

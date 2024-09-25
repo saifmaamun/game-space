@@ -27,7 +27,7 @@ const AllBooking = () => {
             <TableHead className="">Facility Name</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Time Slot</TableHead>
-            <TableHead>Location</TableHead>
+            {/* <TableHead>Location</TableHead> */}
             <TableHead className="">Amount</TableHead>
           </TableRow>
         </TableHeader>
@@ -46,7 +46,7 @@ const AllBooking = () => {
               <TableCell>
                 {bookingData.startTime}-{bookingData.endTime}
               </TableCell>
-              <TableCell>{bookingData.facility.location}</TableCell>
+              {/* <TableCell>{bookingData.facility.location}</TableCell> */}
               <TableCell className="">{bookingData.payableAmount}</TableCell>
             </TableRow>
           ))}

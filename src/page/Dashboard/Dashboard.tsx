@@ -96,7 +96,7 @@ const Dashboard = () => {
       <div className="flex-1 ">
         {/* Mobile Menu Toggle Button */}
         <div
-          className="p-4 lg:hidden  " // Fixed positioning, above the sidebar
+          className="p-y-4 lg:hidden  " // Fixed positioning, above the sidebar
           onClick={toggleSidebar}
         >
           <button className="text-black p-2 rounded bg-white focus:outline-none focus:bg-gray-200 shadow">
@@ -109,7 +109,7 @@ const Dashboard = () => {
         </div>
 
         {/* Main content area */}
-        <main className="mx-4 overflow-y-auto">
+        <main className="mx-4  overflow-y-auto">
           <Outlet />
         </main>
       </div>
