@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -13,7 +12,7 @@ import {
 import { IFacility } from "../../types/facility";
 import { Skeleton } from "../../components/ui/skeleton";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 10;
 
 const Facility = () => {
   // fetching data
@@ -150,41 +149,45 @@ const Facility = () => {
       <div className="pt-16">
         <Pagination>
           <PaginationContent>
-            <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                // disabled={currentPage === 1}
-              />
-            </PaginationItem>
+            {/* Previous Button */}
+            {currentPage > 1 && (
+              <PaginationItem>
+                <PaginationPrevious
+                  href="#"
+                  onClick={(e) => handlePageClick(e, currentPage - 1)}
+                >
+                  Previous
+                </PaginationPrevious>
+              </PaginationItem>
+            )}
 
-            {/* Page Number Links */}
-            {Array.from({ length: totalPages }, (_, index) => (
-              <PaginationItem key={index}>
+            {/* Dynamic Page Number Links */}
+            {getPageNumbers().map((page) => (
+              <PaginationItem key={page}>
                 <PaginationLink
                   href="#"
-                  onClick={() => setCurrentPage(index + 1)}
-                  isActive={currentPage === index + 1}
-                  size={undefined}
+                  onClick={(e) => handlePageClick(e, page)}
+                  isActive={currentPage === page}
+                  className={`text-orange-600 ${
+                    currentPage === page ? "font-bold" : ""
+                  }`}
                 >
-                  {index + 1}
+                  {page}
                 </PaginationLink>
               </PaginationItem>
             ))}
 
-            <PaginationItem>
-              <PaginationEllipsis />
-            </PaginationItem>
-
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                onClick={() =>
-                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                }
-                // disabled={currentPage === totalPages}
-              />
-            </PaginationItem>
+            {/* Next Button */}
+            {currentPage < totalPages && (
+              <PaginationItem>
+                <PaginationNext
+                  href="#"
+                  onClick={(e) => handlePageClick(e, currentPage + 1)}
+                >
+                  Next
+                </PaginationNext>
+              </PaginationItem>
+            )}
           </PaginationContent>
         </Pagination>
       </div>
