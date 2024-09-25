@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "../../components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -14,6 +15,13 @@ import {
   setUser,
   setUserName,
 } from "../../redux/features/user/userSlice";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
+
+// error messages
+interface ErrorData {
+  message: string; // Define the expected structure of error.data
+}
 
 const Login = () => {
   // hooks
@@ -21,8 +29,21 @@ const Login = () => {
   const { email, password } = useAppSelector((state) => state.login);
   const navigate = useNavigate();
 
-  const [login, { data }] = useLoginMutation();
+  const [login, { data, error, isLoading }] = useLoginMutation();
   console.log(data);
+  console.log("from mutation", error);
+
+  // error
+  // Type guard for FetchBaseQueryError
+
+  const isFetchBaseQueryError = (error: any): error is FetchBaseQueryError => {
+    return (error as FetchBaseQueryError).status !== undefined;
+  };
+
+  // Type guard for SerializedError
+  const isSerializedError = (error: any): error is SerializedError => {
+    return (error as SerializedError).message !== undefined;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +52,40 @@ const Login = () => {
       password,
     };
 
+    try {
+      const { data } = await login(loginData);
+
+      if (!data && isLoading) {
+        console.log("loading");
+      }
+      if (data) {
+        console.log(data?.data?.userWithoutPassword);
+
+        const token: string = data?.token;
+        const user = jwtDecode(token);
+
+        // Dispatch the token and user details
+        dispatch(setToken(token));
+        dispatch(setUser(user));
+        dispatch(setUserName(data?.data?.userWithoutPassword?.name));
+
+        // Navigate to the homepage
+        navigate("/");
+      }
+    } catch (error) {
+      // Handle errors here (logging or showing error messages)
+      console.error("An error occurred during login:", error);
+
+      // if (error.response && error.response.data) {
+      //   // Handle server errors (like invalid credentials)
+      //   console.error("Server error:", error.response.data);
+      // } else {
+      //   // Handle other errors (network issues, etc.)
+      //   console.error("Unexpected error:", error.message || error);
+      // }
+    }
+
+    /*
     const { data } = await login(loginData);
     if (data) {
       console.log(data?.data?.userWithoutPassword);
@@ -42,6 +97,7 @@ const Login = () => {
       navigate("/");
     }
 
+    */
     dispatch(resetForm());
   };
   return (
@@ -49,14 +105,38 @@ const Login = () => {
       <div className="w-full flex-1 md:flex  justify-around items-center">
         <div className="text-white w-1/2 mb-4">
           <div className="space-y-4">
-            <h1 className="text-6xl font-bold">
-              <span className="text-orange-600">Welcome</span> Back!
-            </h1>
-            <p className="text-lg">
-              Book your favorite sports facilities in a few clicks. Keep track
-              of your bookings, manage your profile, and enjoy hassle-free
-              scheduling.
-            </p>
+            {isLoading && !data ? (
+              <>
+                <h1 className="text-6xl font-bold">
+                  <span className="text-orange-600">loading...</span>
+                </h1>
+                <p className="text-lg">Please Wait!</p>
+              </>
+            ) : error ? (
+              <>
+                <h1 className="text-6xl font-bold">
+                  <span className="text-red-600">Error!!!</span>
+                </h1>
+                <p className="text-lg">
+                  {isFetchBaseQueryError(error) && error.data
+                    ? (error.data as ErrorData).message // Assert type to ErrorData
+                    : isSerializedError(error)
+                    ? error.message
+                    : "An unknown error occurred"}
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="text-6xl font-bold">
+                  <span className="text-orange-600">Welcome</span> Back!
+                </h1>
+                <p className="text-lg">
+                  Book your favorite sports facilities in a few clicks. Keep
+                  track of your bookings, manage your profile, and enjoy
+                  hassle-free scheduling.
+                </p>
+              </>
+            )}
           </div>
         </div>
         <div className="flex justify-center items-center text-black rounded-lg px-12  py-10 bg-orange-600">

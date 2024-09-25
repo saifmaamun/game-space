@@ -40,22 +40,48 @@ const Register = () => {
       role,
     };
     console.log(userData);
-    const user = await signUp(userData);
-    if (user) {
-      const loginData = {
-        email: userData.email,
-        password: userData.password,
-      };
-      const { data } = await login(loginData);
-      if (data) {
-        const token: string = data?.token;
-        const user = jwtDecode(token);
-        dispatch(setUser(user));
-        dispatch(setToken(token));
-        navigate("/");
+    try {
+      const user = await signUp(userData);
+
+      if (user) {
+        const loginData = {
+          email: userData.email,
+          password: userData.password,
+        };
+
+        const { data } = await login(loginData);
+
+        if (data) {
+          const token: string = data?.token;
+          const decodedUser = jwtDecode(token); // Renamed variable to avoid shadowing
+
+          // Dispatch user and token to Redux store
+          dispatch(setUser(decodedUser));
+          dispatch(setToken(token));
+
+          // Navigate to the homepage
+          navigate("/");
+        }
       }
+
+      // Reset the form after successful sign-up and login
+      dispatch(resetForm());
+    } catch (error) {
+      // Handle the error here (e.g., show a notification or log it)
+      console.error("An error occurred:", error);
+
+      //  // Optionally, you can handle different error types based on the structure of your errors
+      //  if (error.response && error.response.data) {
+      //    // Handle errors from the server
+      //    console.error("Server error:", error.response.data);
+      //  } else {
+      //    // Handle other kinds of errors (network issues, etc.)
+      //    console.error("Unexpected error:", error.message || error);
+      //  }
+
+      // Optionally reset form or show user feedback
+      // dispatch(resetForm());
     }
-    dispatch(resetForm());
 
     // console.log(name, address, email, password, phone, role);
   };
