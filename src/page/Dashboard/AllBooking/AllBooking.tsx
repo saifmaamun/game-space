@@ -13,7 +13,6 @@ import { IBooking } from "../../../types/bookings";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,

@@ -19,6 +19,7 @@ import {
 } from "../../../redux/features/register/registerSlice";
 import { IRegisterFormInput, IUser } from "../../../types/userData";
 import { useSignUpMutation } from "../../../redux/features/register/registerApi";
+import { Skeleton } from "../../../components/ui/skeleton";
 const AddAdmin = () => {
   // hooks
   const dispatch = useAppDispatch();
@@ -58,32 +59,49 @@ const AddAdmin = () => {
             <span className="">Users Data</span>
           </h1>
           <hr />
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="text-base text-orange-600">
-                  User's Name
-                </TableHead>
-                <TableHead className="text-base text-orange-600">
-                  Email
-                </TableHead>
+          {!allUsers?.data ? (
+            <div className="space-y-2 mt-8">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-11/12" />
+              <Skeleton className="h-4 w-10/12" />
+              <Skeleton className="h-4 w-9/12" />
+              <Skeleton className="h-4 w-8/12" />
+              <Skeleton className="h-4 w-7/12" />
+              <Skeleton className="h-4 w-6/12" />
+              <Skeleton className="h-4 w-5/12" />
+              <Skeleton className="h-4 w-4/12" />
+              <Skeleton className="h-4 w-3/12" />
+              <Skeleton className="h-4 w-2/12" />
+              <Skeleton className="h-4 w-1/12" />
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-base text-orange-600">
+                    User's Name
+                  </TableHead>
+                  <TableHead className="text-base text-orange-600">
+                    Email
+                  </TableHead>
 
-                <TableHead className="text-right text-base text-orange-600">
-                  Role
-                </TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {allUsers?.data.map((user: IUser) => (
-                <TableRow key={user._id}>
-                  <TableCell className="font-medium">{user.name}</TableCell>
-
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell className="text-right">{user.role}</TableCell>
+                  <TableHead className="text-right text-base text-orange-600">
+                    Role
+                  </TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {allUsers?.data.map((user: IUser) => (
+                  <TableRow key={user._id}>
+                    <TableCell className="font-medium">{user.name}</TableCell>
+
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell className="text-right">{user.role}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </div>
 
         <div className="flex justify-center items-center text-black rounded-lg px-16  py-10 bg-orange-600">
