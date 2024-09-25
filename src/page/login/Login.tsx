@@ -17,11 +17,7 @@ import {
 } from "../../redux/features/user/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
-
-// error messages
-interface ErrorData {
-  message: string; // Define the expected structure of error.data
-}
+import { ErrorData } from "../../types/errormessage";
 
 const Login = () => {
   // hooks

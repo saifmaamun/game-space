@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../../components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,6 +16,9 @@ import { useSignUpMutation } from "../../redux/features/register/registerApi";
 import { IRegisterFormInput } from "../../types/userData";
 import { useLoginMutation } from "../../redux/features/login/loginApi";
 import { setToken, setUser } from "../../redux/features/user/userSlice";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { SerializedError } from "@reduxjs/toolkit";
+import { ErrorData } from "../../types/errormessage";
 
 const Register = () => {
   // hooks
@@ -28,6 +32,18 @@ const Register = () => {
   const { name, address, email, password, phone, role } = useAppSelector(
     (state) => state.register
   );
+
+  // error
+  // error
+  // Type guard for FetchBaseQueryError
+  const isFetchBaseQueryError = (error: any): error is FetchBaseQueryError => {
+    return (error as FetchBaseQueryError).status !== undefined;
+  };
+
+  // Type guard for SerializedError
+  const isSerializedError = (error: any): error is SerializedError => {
+    return (error as SerializedError).message !== undefined;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,11 +106,37 @@ const Register = () => {
       <div className="w-full flex-1 md:flex  justify-around items-center">
         <div className="text-white w-1/2 mb-4">
           <div className="space-y-4">
-            <h1 className="text-6xl font-semibold">Lets Start Your Journey</h1>
-            <p className="text-lg">
-              New to our platform? Join us and make the most out of your sports
-              experience. Your next game is just a booking away!
-            </p>
+            {isLoading && !signinData ? (
+              <>
+                <h1 className="text-6xl font-bold">
+                  <span className="text-orange-600">loading...</span>
+                </h1>
+                <p className="text-lg">Please Wait!</p>
+              </>
+            ) : error ? (
+              <>
+                <h1 className="text-6xl font-bold">
+                  <span className="text-red-600">Error!!!</span>
+                </h1>
+                <p className="text-lg">
+                  {isFetchBaseQueryError(error) && error.data
+                    ? (error.data as ErrorData).message // Assert type to ErrorData
+                    : isSerializedError(error)
+                    ? error.message
+                    : "An unknown error occurred"}
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="text-6xl font-semibold">
+                  Lets Start Your Journey
+                </h1>
+                <p className="text-lg">
+                  New to our platform? Join us and make the most out of your
+                  sports experience. Your next game is just a booking away!
+                </p>
+              </>
+            )}
           </div>
         </div>
         <div className="flex justify-center items-center text-black rounded-lg px-16  py-10 bg-orange-600">
