@@ -11,8 +11,9 @@ import {
   PaginationPrevious,
 } from "../../components/ui/pagination";
 import { IFacility } from "../../types/facility";
+import { Skeleton } from "../../components/ui/skeleton";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 5;
 
 const Facility = () => {
   // fetching data
@@ -21,7 +22,6 @@ const Facility = () => {
   // States to track the search term, price filter, and pagination
   const [searchTerm, setSearchTerm] = useState("");
   const [maxPrice, setMaxPrice] = useState(Infinity); // Infinity to show all by default
-  const [currentPage, setCurrentPage] = useState(1);
 
   // Filtered facilities based on the search term and price
   const filteredFacilities = data?.data
@@ -30,16 +30,41 @@ const Facility = () => {
     )
     .filter((facility: IFacility) => facility.pricePerHour <= maxPrice);
 
-  // Calculate total facilities and pages
+  // paginations
+  // paginations
+  const [currentPage, setCurrentPage] = useState<number>(1); // Start at page 1
 
-  const totalFacilities = filteredFacilities?.length;
+  // Total bookings count and total pages calculation
+  const totalFacilities = filteredFacilities?.length || data?.data.length;
   const totalPages = Math.ceil(totalFacilities / ITEMS_PER_PAGE);
 
-  // Get the facilities for the current page
-  const currentFacilities = filteredFacilities?.slice(
+  // Slice data for the current page
+  const paginatedFacilities = data?.data?.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+  console.log(paginatedFacilities);
+
+  // Function to generate page numbers (previous 2, current, next 2)
+  const getPageNumbers = (): number[] => {
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, currentPage + 2);
+    const pages = [];
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
+
+  const handlePageClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    page: number
+  ) => {
+    e.preventDefault();
+    setCurrentPage(page);
+  };
 
   return (
     <div className=" my-12">
@@ -85,11 +110,32 @@ const Facility = () => {
           />
         </div>
       </div>
-
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 border-t-2  py-4 border-orange-600 ">
-        {/* {data?.data.map((facility) => (
+      {!data ? (
+        <div className="flex flex-col space-y-3">
+          <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-[250px]" />
+            <Skeleton className="h-4 w-[200px]" />
+          </div>
+        </div>
+      ) : (
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 border-t-2  py-4 border-orange-600 ">
+          {/* {data?.data.map((facility) => (
           <FacilityCard facility={facility} />
         ))} */}
+
+          {paginatedFacilities?.length > 0 ? (
+            paginatedFacilities.map((facility: IFacility) => (
+              <FacilityCard key={facility._id} facility={facility} />
+            ))
+          ) : (
+            <p>No facilities found.</p>
+          )}
+        </div>
+      )}
+
+      {/* <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 border-t-2  py-4 border-orange-600 ">
+       
 
         {currentFacilities?.length > 0 ? (
           currentFacilities.map((facility: IFacility) => (
@@ -98,7 +144,7 @@ const Facility = () => {
         ) : (
           <p>No facilities found.</p>
         )}
-      </div>
+      </div> */}
 
       {/* Pagination Component */}
       <div className="pt-16">
