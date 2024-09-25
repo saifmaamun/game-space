@@ -5,6 +5,7 @@ import { useCreateFacilityMutation } from "../../../redux/features/facility/faci
 import {
   resetFacility,
   setFacilityDescription,
+  setFacilityImageUrl,
   setFacilityLocation,
   setFacilityName,
   setFacilityPrice,
@@ -14,7 +15,7 @@ const AddFacility = () => {
   // hooks
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { description, location, name, pricePerHour } = useAppSelector(
+  const { description, imgUrl, location, name, pricePerHour } = useAppSelector(
     (state) => state.facility
   );
   const [createFacility, { data, isLoading, isError }] =
@@ -28,6 +29,7 @@ const AddFacility = () => {
     const newFacility = {
       name,
       description,
+      imgUrl,
       pricePerHour,
       location,
     };
@@ -96,6 +98,27 @@ const AddFacility = () => {
                   className="rounded-sm p-2 py-1 text-lg"
                   onChange={(e) =>
                     dispatch(setFacilityLocation(e.target.value))
+                  }
+                />
+              </div>
+            </div>
+
+            {/* image url */}
+            <div className="space-y-2">
+              <div>
+                <label htmlFor="image" className="text-lg font-semibold">
+                  Image URL
+                </label>
+              </div>
+              <div>
+                <input
+                  type="url"
+                  id="image"
+                  value={imgUrl}
+                  required
+                  className="rounded-sm p-2 py-1 text-lg"
+                  onChange={(e) =>
+                    dispatch(setFacilityImageUrl(e.target.value))
                   }
                 />
               </div>

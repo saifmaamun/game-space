@@ -3,12 +3,14 @@ export interface IFacilityState {
   id: string;
   name: string;
   description: string;
+  imgUrl: string;
   pricePerHour: number;
   location: string;
   isDeleted: boolean;
   oldData: {
     name: string;
     description: string;
+    imgUrl: string;
     pricePerHour: number;
     location: string;
   };
@@ -18,12 +20,14 @@ const initialState: IFacilityState = {
   id: "",
   name: "",
   description: "",
+  imgUrl: "",
   pricePerHour: 0,
   location: "",
   isDeleted: false,
   oldData: {
     name: "",
     description: "",
+    imgUrl: "",
     pricePerHour: 0,
     location: "",
   },
@@ -41,6 +45,9 @@ const facilitySlice = createSlice({
     },
     setFacilityDescription: (state, action) => {
       state.description = action.payload;
+    },
+    setFacilityImageUrl: (state, action) => {
+      state.imgUrl = action.payload;
     },
     setFacilityPrice: (state, action) => {
       state.pricePerHour = action.payload;
@@ -66,6 +73,7 @@ const facilitySlice = createSlice({
 export const {
   setFacilityId,
   setFacilityDescription,
+  setFacilityImageUrl,
   setFacilityLocation,
   setFacilityName,
   setFacilityPrice,

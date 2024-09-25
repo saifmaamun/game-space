@@ -55,7 +55,7 @@ export const router = createBrowserRouter([
         path: "/facility/:id",
         element: (
           <PrivateRoute>
-            element: <FacilityDetails />,
+            <FacilityDetails />,
           </PrivateRoute>
         ),
       },

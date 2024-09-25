@@ -14,7 +14,7 @@ const FacilityDetails = () => {
   const { data } = useGetSingleFacilityQuery(id);
 
   return (
-    <div className="flex-1 md:flex justify-around items-center text-black space-y-6 gap-6 my-16 border rounded-lg px-6 py-16">
+    <div className="flex-1 md:flex justify-around items-center text-black space-y-6 gap-6 my-16 border rounded-3xl px-6 py-16 shadow-md">
       <div>
         <div>
           <h1 className="text-5xl font-bold my-6">
@@ -63,7 +63,13 @@ const FacilityDetails = () => {
           </Link>
         </div>
       </div>
-      <div className="w-full">img</div>
+      <div className=" rounded-3xl shadow-2xl">
+        <img
+          className=" rounded-3xl shadow-2xl"
+          src={data?.data.imgUrl}
+          alt={`image of ${data?.data.name}`}
+        />
+      </div>
     </div>
   );
 };
