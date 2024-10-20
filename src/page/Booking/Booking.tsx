@@ -176,12 +176,6 @@ const Booking = () => {
             {endTime && (
               <div className="text-center ">
                 <ConfarmationModal />
-                {/* <Button
-                onClick={booking}
-                className="text-lg  w-full bg-indigo-950"
-              >
-                Book
-              </Button> */}
               </div>
             )}
           </div>

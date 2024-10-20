@@ -5,7 +5,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -18,7 +17,7 @@ import { format } from "date-fns";
 
 const MyBooking = () => {
   // get users booking
-  const { data: bookings } = useUsersBookingQuery(undefined);
+  const { data: bookings, isLoading } = useUsersBookingQuery(undefined);
   const [cancelBooking, { data: cancleBookingData }] =
     useCancelBookingMutation();
   console.log(cancleBookingData);
@@ -30,11 +29,8 @@ const MyBooking = () => {
 
   return (
     <div className="bg-indigo-950  text-white px-8 py-8 rounded-xl w-full">
-      <h1 className="text-2xl font-bold">
-        {" "}
-        My Booking {bookings?.data.length}
-      </h1>
-      {bookings?.data ? (
+      <h1 className="text-2xl font-bold">My Booking {bookings?.data.length}</h1>
+      {isLoading ? (
         <div className="space-y-2 mt-8">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-11/12" />
@@ -49,6 +45,20 @@ const MyBooking = () => {
           <Skeleton className="h-4 w-2/12" />
           <Skeleton className="h-4 w-1/12" />
         </div>
+      ) : !bookings?.data ? (
+        <Table>
+          <TableCaption>No Booking Yet.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="">Facility Name</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>Time Slot</TableHead>
+              <TableHead>Location</TableHead>
+              <TableHead className="">Amount</TableHead>
+              <TableHead className="text-right">Cancelation</TableHead>
+            </TableRow>
+          </TableHeader>
+        </Table>
       ) : (
         <Table>
           <TableCaption>A list of your recent invoices.</TableCaption>
@@ -117,7 +127,6 @@ const MyBooking = () => {
               )
             )}
           </TableBody>
-          
         </Table>
       )}
     </div>
