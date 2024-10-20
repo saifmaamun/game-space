@@ -2,17 +2,20 @@ import { Button } from "../../components/ui/button";
 import { useGetSingleFacilityQuery } from "../../redux/features/facility/facilityApi";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  resetAvailabilityState,
   setDateForAvaiblablityChecking,
   setFacilityForAvaiblablityChecking,
 } from "../../redux/features/availablity/availabilitySlice";
 import { useAvailityCheckQuery } from "../../redux/features/availablity/availabilityApi";
 import {
+  resetBookingState,
   setBookingDate,
   setBookingEndTime,
   setBookingFacility,
   setBookingStartTime,
 } from "../../redux/features/booking/bookingSlice";
 import ConfarmationModal from "../../components/ui/ConfarmationModal";
+import { useEffect } from "react";
 
 const Booking = () => {
   // hooks
@@ -20,7 +23,24 @@ const Booking = () => {
 
   // getting the facility id
   const { id } = useAppSelector((state) => state.facility);
+  const { facility: bookingID } = useAppSelector((state) => state.booking);
+  const { facility: availableID } = useAppSelector(
+    (state) => state.availability
+  );
+
   dispatch(setFacilityForAvaiblablityChecking(id));
+
+  useEffect(() => {
+    if (availableID && bookingID !== availableID) {
+      dispatch(resetAvailabilityState());
+      dispatch(resetBookingState());
+    }
+  }, [availableID, bookingID, dispatch]);
+
+  // if (availableID && bookingID != availableID) {
+  //   dispatch(resetAvailabilityState());
+  //   dispatch(resetBookingState());
+  // }
 
   // getting the states
   const { facility, date } = useAppSelector((state) => state.availability);
@@ -42,10 +62,10 @@ const Booking = () => {
 
   //   set start and end time
   const bookingTimeSet = (text: string) => {
+    dispatch(setBookingFacility(id));
     dispatch(setBookingStartTime(text.slice(0, 5)));
     dispatch(setBookingEndTime(text.slice(-5)));
     dispatch(setBookingDate(availablityData.date));
-    dispatch(setBookingFacility(id));
   };
 
   //   booking
@@ -120,6 +140,7 @@ const Booking = () => {
                   type="date"
                   required
                   className="rounded-md p-2 mb-2 py-1 text-lg"
+                  value={date}
                   onChange={(e) =>
                     dispatch(setDateForAvaiblablityChecking(e.target.value))
                   }
@@ -129,7 +150,8 @@ const Booking = () => {
 
             <div className="py-8  ">
               <h1 className="text-4xl mb-4 font-bold">Available Slots</h1>
-              {availableSlots ? (
+
+              {date && availableSlots ? (
                 <div className="grid grid-cols-1 text-center gap-4 text-black sm:grid-cols-2">
                   {availableSlots?.data.map(
                     (slot: { startTime: string; endTime: string }) => (

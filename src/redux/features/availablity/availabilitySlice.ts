@@ -19,12 +19,17 @@ const availabilitySlice = createSlice({
     setDateForAvaiblablityChecking: (state, action) => {
       state.date = action.payload;
     },
+    resetAvailabilityState: (state) => {
+      state.facility = "";
+      state.date = "";
+    },
   },
 });
 
 export const {
   setDateForAvaiblablityChecking,
   setFacilityForAvaiblablityChecking,
+  resetAvailabilityState,
 } = availabilitySlice.actions;
 
 export default availabilitySlice.reducer;

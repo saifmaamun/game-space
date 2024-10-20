@@ -29,6 +29,12 @@ const bookingSlice = createSlice({
     setBookingEndTime: (state, action) => {
       state.endTime = action.payload;
     },
+    resetBookingState: (state) => {
+      state.facility = "";
+      state.date = "";
+      state.startTime = "";
+      state.endTime = "";
+    },
   },
 });
 
@@ -37,6 +43,7 @@ export const {
   setBookingEndTime,
   setBookingDate,
   setBookingFacility,
+  resetBookingState,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;
