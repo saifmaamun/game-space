@@ -12,7 +12,7 @@ import { IFacility } from "../../types/facility";
 
 const FacilityCard = ({ facility }: { facility: IFacility }) => {
   const { _id, name, imgUrl, description, pricePerHour, location } = facility;
-  console.log(_id, description, imgUrl);
+  // console.log(_id, description, imgUrl);
 
   // css properties
   const cardContainerStyle = {

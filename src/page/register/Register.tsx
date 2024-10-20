@@ -15,7 +15,11 @@ import {
 import { useSignUpMutation } from "../../redux/features/register/registerApi";
 import { IRegisterFormInput } from "../../types/userData";
 import { useLoginMutation } from "../../redux/features/login/loginApi";
-import { setToken, setUser } from "../../redux/features/user/userSlice";
+import {
+  setToken,
+  setUser,
+  setUserName,
+} from "../../redux/features/user/userSlice";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { SerializedError } from "@reduxjs/toolkit";
 import { ErrorData } from "../../types/errormessage";
@@ -55,7 +59,7 @@ const Register = () => {
       phone,
       role,
     };
-    console.log(userData);
+    // console.log(userData);
     try {
       const user = await signUp(userData);
 
@@ -70,10 +74,12 @@ const Register = () => {
         if (data) {
           const token: string = data?.token;
           const decodedUser = jwtDecode(token); // Renamed variable to avoid shadowing
+          console.log("register 73", decodedUser);
 
           // Dispatch user and token to Redux store
           dispatch(setUser(decodedUser));
           dispatch(setToken(token));
+          dispatch(setUserName(data?.data?.userWithoutPassword?.name));
 
           // Navigate to the homepage
           navigate("/");
@@ -85,21 +91,7 @@ const Register = () => {
     } catch (error) {
       // Handle the error here (e.g., show a notification or log it)
       console.error("An error occurred:", error);
-
-      //  // Optionally, you can handle different error types based on the structure of your errors
-      //  if (error.response && error.response.data) {
-      //    // Handle errors from the server
-      //    console.error("Server error:", error.response.data);
-      //  } else {
-      //    // Handle other kinds of errors (network issues, etc.)
-      //    console.error("Unexpected error:", error.message || error);
-      //  }
-
-      // Optionally reset form or show user feedback
-      // dispatch(resetForm());
     }
-
-    // console.log(name, address, email, password, phone, role);
   };
   return (
     <div className="mt-20 px-10 py-20 bg-indigo-950 rounded-lg">

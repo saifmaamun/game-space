@@ -26,8 +26,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [login, { data, error, isLoading }] = useLoginMutation();
-  console.log(data);
-  console.log("from mutation", error);
 
   // error
   // Type guard for FetchBaseQueryError
@@ -59,6 +57,7 @@ const Login = () => {
 
         const token: string = data?.token;
         const user = jwtDecode(token);
+        console.log("login 62", user);
 
         // Dispatch the token and user details
         dispatch(setToken(token));
@@ -71,29 +70,8 @@ const Login = () => {
     } catch (error) {
       // Handle errors here (logging or showing error messages)
       console.error("An error occurred during login:", error);
-
-      // if (error.response && error.response.data) {
-      //   // Handle server errors (like invalid credentials)
-      //   console.error("Server error:", error.response.data);
-      // } else {
-      //   // Handle other errors (network issues, etc.)
-      //   console.error("Unexpected error:", error.message || error);
-      // }
     }
 
-    /*
-    const { data } = await login(loginData);
-    if (data) {
-      console.log(data?.data?.userWithoutPassword);
-      const token: string = data?.token;
-      const user = jwtDecode(token);
-      dispatch(setToken(token));
-      dispatch(setUser(user));
-      dispatch(setUserName(data?.data?.userWithoutPassword?.name));
-      navigate("/");
-    }
-
-    */
     dispatch(resetForm());
   };
   return (
