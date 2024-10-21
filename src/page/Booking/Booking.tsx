@@ -20,6 +20,8 @@ import { useEffect } from "react";
 const Booking = () => {
   // hooks
   const dispatch = useAppDispatch();
+  // loading state
+  const { isLoading } = useAppSelector((state) => state.loading);
 
   // getting the facility id
   const { id } = useAppSelector((state) => state.facility);
@@ -37,11 +39,6 @@ const Booking = () => {
     }
   }, [availableID, bookingID, dispatch]);
 
-  // if (availableID && bookingID != availableID) {
-  //   dispatch(resetAvailabilityState());
-  //   dispatch(resetBookingState());
-  // }
-
   // getting the states
   const { facility, date } = useAppSelector((state) => state.availability);
   const availablityData = { date, facility };
@@ -57,8 +54,6 @@ const Booking = () => {
     },
     { skip: !date }
   );
-  //   const [placeBooking, { data, isLoading, isError }] =
-  //     usePlaceBookingMutation();
 
   //   set start and end time
   const bookingTimeSet = (text: string) => {
@@ -67,11 +62,6 @@ const Booking = () => {
     dispatch(setBookingEndTime(text.slice(-5)));
     dispatch(setBookingDate(availablityData.date));
   };
-
-  //   booking
-  //   const booking = () => {
-  //     placeBooking(bookingData);
-  //   };
 
   return (
     <div className="text-center">
@@ -177,6 +167,11 @@ const Booking = () => {
               <div className="text-center ">
                 <ConfarmationModal />
               </div>
+            )}
+            {isLoading && (
+              <p className="text-white my-4 font-semibold text-2xl">
+                Be Patient, its Working...
+              </p>
             )}
           </div>
         </div>

@@ -5,6 +5,7 @@ import facilityReducer from "./features/facility/facilitySlice";
 import { baseApi } from "./api/apiSlice";
 import userReducer from "./features/user/userSlice";
 import bookingReducer from "./features/booking/bookingSlice";
+import loadingReducer from "./features/loadingStates/loadingStatesSlice";
 import avaibilatyReducer from "./features/availablity/availabilitySlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -34,6 +35,7 @@ export const store = configureStore({
     booking: bookingReducer,
     facility: persistedFacilityReducer,
     user: persistedUserReducer,
+    loading: loadingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(

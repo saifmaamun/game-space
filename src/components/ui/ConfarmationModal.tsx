@@ -8,27 +8,37 @@ import {
 } from "@radix-ui/react-alert-dialog";
 import { AlertDialogFooter, AlertDialogHeader } from "./alert-dialog";
 import { Button } from "./button";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { usePlaceBookingMutation } from "../../redux/features/booking/bookingApi";
 
+import { setIsLoading } from "../../redux/features/loadingStates/loadingStatesSlice";
+
 const ConfarmationModal = () => {
+  // hooks
+  const dispatch = useAppDispatch();
+
   const bookingData = useAppSelector((state) => state.booking);
   const [placeBooking, { data }] = usePlaceBookingMutation();
   console.log(data);
 
   //   booking
   const booking = async () => {
+    dispatch(setIsLoading(true));
     try {
       const res = await placeBooking(bookingData);
+      console.log(res.data.data.payment_url);
 
       if (res.data.success) {
         window.location.href = res.data.data.payment_url;
       } else {
         console.error("Order creation failed:", res.data.message);
+        dispatch(setIsLoading(false));
       }
     } catch (error) {
       console.log(error);
+      dispatch(setIsLoading(false));
     }
+    dispatch(setIsLoading(false));
     // await placeBooking(bookingData);
 
     // navigate("/booking/details");
