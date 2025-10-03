@@ -30,7 +30,11 @@ const Booking = () => {
     (state) => state.availability
   );
 
-  dispatch(setFacilityForAvaiblablityChecking(id));
+  useEffect(() => {
+    if (id) {
+      dispatch(setFacilityForAvaiblablityChecking(id));
+    }
+  }, [id, dispatch]);
 
   useEffect(() => {
     if (availableID && bookingID !== availableID) {
