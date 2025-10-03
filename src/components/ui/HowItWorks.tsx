@@ -57,7 +57,9 @@ const HowItWorksTimeline: React.FC = () => {
   ];
 
   // ✅ fixed curve path so nodes connect properly
+
   const generateCurvePath = (index: number, total: number) => {
+    console.log(total);
     const stepGap = 16 * 16; // 16rem ≈ 256px
     const nodeOffset = 32; // offset for circle center
     const startY = index * stepGap + nodeOffset;

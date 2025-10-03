@@ -19,6 +19,7 @@ const ConfarmationModal = () => {
 
   const bookingData = useAppSelector((state) => state.booking);
   const [placeBooking, { data }] = usePlaceBookingMutation();
+  console.log(data);
 
   //   booking
   const booking = async () => {
