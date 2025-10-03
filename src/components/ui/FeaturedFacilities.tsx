@@ -12,7 +12,7 @@ const FeaturedFacilities = () => {
         Our Top <span className="text-orange-600">Facilities </span>
       </h1>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 border-t-2  py-4 ">
-        {data?.data.slice(2).map((facility: IFacility) => (
+        {data?.data.slice(1).map((facility: IFacility) => (
           <FacilityCard facility={facility} />
         ))}
       </div>
