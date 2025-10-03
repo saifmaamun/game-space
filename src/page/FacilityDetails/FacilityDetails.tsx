@@ -4,6 +4,7 @@ import { Button } from "../../components/ui/button";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { setFacilityId } from "../../redux/features/facility/facilitySlice";
 import { Skeleton } from "../../components/ui/skeleton";
+import { useEffect } from "react";
 
 const FacilityDetails = () => {
   //   hooks
@@ -12,7 +13,11 @@ const FacilityDetails = () => {
 
   const { id } = useParams();
   //   setting the id for the facility
-  dispatch(setFacilityId(id));
+  useEffect(() => {
+    if (id) {
+      dispatch(setFacilityId(id));
+    }
+  }, [id, dispatch]);
   // get single Facility query
   const { data } = useGetSingleFacilityQuery(id);
 
