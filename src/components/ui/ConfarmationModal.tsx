@@ -19,19 +19,20 @@ const ConfarmationModal = () => {
 
   const bookingData = useAppSelector((state) => state.booking);
   const [placeBooking, { data }] = usePlaceBookingMutation();
-  console.log(data);
 
   //   booking
   const booking = async () => {
+    console.log(bookingData);
     dispatch(setIsLoading(true));
     try {
       const res = await placeBooking(bookingData);
-      console.log(res.data.data.payment_url);
+      console.log(res);
+      console.log(res?.data?.data?.payment_url);
 
-      if (res.data.success) {
-        window.location.href = res.data.data.payment_url;
+      if (res?.data?.success) {
+        window.location.href = res?.data?.data?.payment_url;
       } else {
-        console.error("Order creation failed:", res.data.message);
+        console.error("Order creation failed:", res?.data?.message);
         dispatch(setIsLoading(false));
       }
     } catch (error) {
